@@ -1,6 +1,6 @@
 ---
+title : "장민서"
 layout : default
-title : 장민서
 ---
 
 # 장민서
