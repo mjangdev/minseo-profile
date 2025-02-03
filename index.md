@@ -16,6 +16,10 @@
 
 📭 경기도 수원시 장안구 수일로 135 (송죽동)
 
+## 📜 Publish
+
+[황인성, 고영우, **장민서**. (2024-10-24). 채색 그래프의 Max Clique 점 집합을 모두 구하는 알고리즘. 한국정보통신학회 종합학술대회 논문집, 경남.](https://dbpia.co.kr/journal/articleDetail?nodeId=NODE12000823)
+
 ## 💻 Project
 
 [과제 공지 서비스](https://hw.minseo.net)
