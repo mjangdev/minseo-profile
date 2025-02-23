@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>장민서</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <!-- AOS CSS (Animate On Scroll) -->
+  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+  <!-- Google Fonts: Nanum Gothic -->
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #f8f9fa;
+      font-family: 'Nanum Gothic', sans-serif;
+      color: #333;
+    }
+    /* 공통: 전체 화면 파란색 헤더 */
+    .profile-header {
+      height: 100vh;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.5s ease-out, box-shadow 0.5s ease-out;
+      color: #fff;
+    }
+    .profile-header.scrolled {
+      transform: translateY(-80px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    /* 데스크탑 헤더 (화면 ≥ md) */
+    .desktop-header { display: none; }
+    @media (min-width: 768px) {
+      .desktop-header { display: block; }
+    }
+    .desktop-header .header-text h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin: 0 0 1rem;
+      line-height: 1.2;
+    }
+    .desktop-header .header-text h1 small {
+      font-size: 1.2rem;
+      vertical-align: middle;
+      margin-left: 10px;
+    }
+    /* 원래대로 텍스트는 그대로 표시 */
+    .desktop-header .header-text p.lead {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .desktop-header .header-text p.lead,
+    .desktop-header .header-bottom-text {
+      /* 여백과 두께는 원래 스타일 그대로 */
+      color: #fff;
+    }
+    .desktop-header .header-bottom-text {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    .desktop-header .header-logo {
+      text-align: right;
+      position: relative;
+      z-index: 10;
+    }
+    .desktop-header .header-logo img {
+      max-width: 150px;
+      width: 100%;
+      height: auto;
+      max-height: 200px;
+    }
+    /* 모바일 헤더 (화면 < md) */
+    .mobile-header { display: none; }
+    @media (max-width: 767.98px) {
+      .mobile-header { display: block; }
+      .mobile-header-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* 수직 중앙 정렬 */
+        height: 100%;
+        padding: 0 20px;
+      }
+      .mobile-header .mobile-header-top {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+      .mobile-header .mobile-header-top img {
+        max-height: 150px;
+        width: auto;
+      }
+      .mobile-divider {
+        border: none;
+        border-top: 1px solid #fff;
+        margin: 20px 0;
+      }
+      .mobile-header .mobile-header-bottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+      .mobile-header .mobile-header-bottom h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0;
+      }
+      .mobile-header .mobile-header-bottom h1 small {
+        font-size: 1rem;
+        margin-left: 10px;
+      }
+      .mobile-header .mobile-header-bottom p.lead {
+        font-size: 1.2rem;
+        margin: 5px 0;
+      }
+      .mobile-header .mobile-header-bottom p {
+        font-size: 0.8rem;
+      }
+    }
+    /* 스크롤 유도 아이콘 (공통) */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      color: #fff;
+      animation: bounce 2s infinite;
+      cursor: pointer;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-10px); }
+      60% { transform: translateX(-50%) translateY(-5px); }
+    }
+    /* 콘텐츠 섹션 제목 */
+    .section-title {
+      font-weight: 700;
+      color: #2575fc;
+      margin: 2rem 0 1rem;
+      border-bottom: 3px solid #2575fc;
+      padding-bottom: 0.5rem;
+    }
+    /* 카드 및 내용 여백 */
+    .card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 1.5rem;
+      background: #fff;
+    }
+    .card-body {
+      padding: 1.5rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+    .contact-icon {
+      width: 30px;
+    }
+    a {
+      color: #2575fc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    /* 콘텐츠 섹션에서는 각주식 팝오버 처리 (헤더 부분은 원래대로) */
+    .footnote {
+      cursor: pointer;
+      color: #2575fc;
+      margin-left: 5px;
+    }
+    .footnote:hover {
+      color: #1a5bb8;
+    }
+  </style>
+</head>
+<body>
+  <!-- 데스크탑 헤더 (화면 ≥ md) - 원래대로 표시 -->
+  <header class="profile-header desktop-header d-none d-md-block">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <!-- 왼쪽: 텍스트 정보 -->
+        <div class="col-12 col-md-8 header-text d-flex flex-column">
+          <h1>
+            장민서 <small>MINSEO JANG</small>
+          </h1>
+          <p class="lead">과학영재학교 경기과학고 전교 부회장</p>
+          <p class="header-bottom-text">GYEONGGI SCIENCE HIGH SCHOOL FOR THE GIFTED</p>
+        </div>
+        <!-- 오른쪽: 로고 -->
+        <div class="col-12 col-md-4 header-logo text-md-end">
+          <img src="gshs_logo.png" alt="경기과학고 로고" class="img-fluid">
+        </div>
+      </div>
+    </div>
+    <!-- 스크롤 유도 아이콘 -->
+    <div class="scroll-indicator animate__animated animate__fadeInDown">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </header>
+
+  <!-- 모바일 헤더 (화면 < md) - 헤더는 원래대로, 각주는 제외 -->
+  <header class="profile-header mobile-header d-md-none">
+    <div class="mobile-header-container">
+      <div class="mobile-header-top">
+        <!-- 우측 중상단에 로고 -->
+        <div class="w-100 text-end">
+          <img src="gshs_logo.png" alt="경기과학고 로고" class="img-fluid">
+        </div>
+      </div>
+      <!-- 구분선 -->
+      <div class="mobile-divider"></div>
+      <div class="mobile-header-bottom">
+        <!-- 좌측 중하단에 텍스트 정보 -->
+        <h1>
+          장민서 <small>MINSEO JANG</small>
+        </h1>
+        <p class="lead">과학영재학교 경기과학고 전교 부회장</p>
+        <p>GYEONGGI SCIENCE HIGH SCHOOL FOR THE GIFTED</p>
+      </div>
+    </div>
+    <!-- 스크롤 유도 아이콘 -->
+    <div class="scroll-indicator animate__animated animate__fadeInDown">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </header>
+
+  <!-- 메인 콘텐츠: 각 섹션은 이전과 동일하며, 여기서만 각주식 팝오버 처리 -->
+  <main class="container my-4">
+    <section data-aos="fade-up">
+      <h2 class="section-title">Profile</h2>
+      <div class="card">
+        <div class="card-body">
+          <p>과학영재학교 경기과학고등학교 <strong>전교 부회장</strong></p>
+          <p>한국지구과학회 포스터 발표 고등부 <strong>최우수상</strong></p>
+          <p>중학교 <strong>전교 정·부회장</strong> 및 <strong>수석</strong> 졸업 <span class="footnote" data-bs-toggle="popover" data-bs-trigger="click" data-bs-content="졸업석차 1등/298명, 교내상 31개, 교육감상 4개"><i class="fas fa-info-circle"></i></span></p>
+        </div>
+      </div>
+    </section>
+    <section data-aos="fade-up" data-aos-delay="100">
+      <h2 class="section-title">Contact</h2>
+      <div class="card">
+        <div class="card-body">
+          <p>
+            <i class="fas fa-envelope contact-icon"></i>
+            <a href="mailto:gs24091@gs.hs.kr">gs24091@gs.hs.kr</a>
+          </p>
+          <p>
+            <i class="fas fa-map-marker-alt contact-icon"></i>
+            경기도 수원시 장안구 수일로 135
+          </p>
+        </div>
+      </div>
+    </section>
+    <section data-aos="fade-up" data-aos-delay="200">
+      <h2 class="section-title">Publish</h2>
+      <div class="card">
+        <div class="card-body">
+          <p>
+            <a href="https://dbpia.co.kr/journal/articleDetail?nodeId=NODE12000823" target="_blank">
+              황인성, 고영우, <strong>장민서</strong>. (2024-10-24). 채색 그래프의 Max Clique 점 집합을 모두 구하는 알고리즘.
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+    <section data-aos="fade-up" data-aos-delay="300">
+      <h2 class="section-title">Project</h2>
+      <div class="card">
+        <div class="card-body">
+          <p>
+            <a href="https://hw.minseo.net" target="_blank">HW.MINSEO.NET 과제 공지 서비스</a>
+          </p>
+        </div>
+      </div>
+    </section>
+    <section data-aos="fade-up" data-aos-delay="400">
+      <h2 class="section-title">Education</h2>
+      <div class="card">
+        <div class="card-body">
+          <p>
+            과학영재학교 경기과학고등학교 재학<span class="footnote" data-bs-toggle="popover" data-bs-trigger="click" data-bs-content="전교 부회장, 개발동아리 DevOps 기장"><i class="fas fa-info-circle"></i></span>
+          </p>
+          <p>
+            한국지구과학올림피아드 기초·심화 교육과정 수료
+          </p>
+          <p>
+            중학교 수석 졸업 <span class="footnote" data-bs-toggle="popover" data-bs-trigger="click" data-bs-content="졸업석차 1등/298명, 전교 정·부회장, 교내상 31개, 교육감상 4개"><i class="fas fa-info-circle"></i></span>
+          </p>
+          <p>
+            교육부 대학부설 정보보호영재교육원 중등심화과정 수료 <span class="footnote" data-bs-toggle="popover" data-bs-trigger="click" data-bs-content="교육부 지정 대학부설 정보보호영재교육원 서울여대(수도권), 개근상, 우수상"><i class="fas fa-info-circle"></i></span>
+          </p>
+          <p>
+            인천대학교 과학영재교육원 초등심화/초등사사 수료
+          </p>
+        </div>
+      </div>
+    </section>
+    <section data-aos="fade-up" data-aos-delay="500">
+      <h2 class="section-title">Activity</h2>
+      <div class="card">
+        <div class="card-body">
+          <ul class="list-unstyled">
+            <li>2024: 서울대학교 농생명과학공동기기원 생명·환경과학 체험학습 수료 <span class="footnote" data-bs-toggle="popover" data-bs-trigger="click" data-bs-content="동•식물 DNA 추출"><i class="fas fa-info-circle"></i></span></li>
+            <li>2024: 청소년 글로벌 과학대장정 수료 (미국 서부)</li>
+            <li>2024: 제20회 경암바이오유스 캠프 수료 <span class="footnote" data-bs-toggle="popover" data-bs-trigger="click" data-bs-content="연세대학교"><i class="fas fa-info-circle"></i></span></li>
+            <li>2024: GSHS-NJC International Research Exchange Programme 수료 <span class="footnote" data-bs-toggle="popover" data-bs-trigger="click" data-bs-content="경기과학고 측 학생 팀장"><i class="fas fa-info-circle"></i></span></li>
+            <li>2023: 송암스페이스센터 Challenger Learning Center 우주 교실 과정 수료</li>
+            <li>2023: 인천광역시 교육청 중·고교생 싱가포르 공간혁신 우수기관 탐방 참가</li>
+            <li>2022: 인천광역시 서부교육지원청 학생참여위원회 위원</li>
+            <li>2021: 인천서부경찰서 청소년 참여 정책자문단 단원</li>
+            <li>2021: 검단청소년센터 제13기 청소년운영위원회 위원 <span class="footnote" data-bs-toggle="popover" data-bs-trigger="click" data-bs-content="부위원장"><i class="fas fa-info-circle"></i></span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section data-aos="fade-up" data-aos-delay="600">
+      <h2 class="section-title">Awards</h2>
+      <div class="card">
+        <div class="card-body">
+          <ul class="list-unstyled">
+            <li>2024: 경기과학고 문제해결프로그래밍대상 은상</li>
+            <li>2024: 경기과학고 봉사부문 표창</li>
+            <li>2024: 한국정보통신학회 추계종합학술대회 학생우수논문상</li>
+            <li>2024: 한국지구과학회 추계학술발표회 포스터 발표 분야 고등부 최우수상</li>
+            <li>2024: 경기과학고 창의적 아이디어대회 장려상</li>
+            <li>2023: 인천광역시 교육감 졸업 표창</li>
+            <li>2023: 제13회 서부 수학원리탐구축전 보고서 부문 표창 <span class="footnote" data-bs-toggle="popover" data-bs-trigger="click" data-bs-content="동아리 표창, 교육장상"><i class="fas fa-info-circle"></i></span></li>
+            <li>2023: 인천광역시 교육감 청소년의 달 표창</li>
+            <li>2023: 인천광역시 청소년대상 (면학부문, 인천광역시장상)</li>
+            <li>2023: 인천광역시 교육감 (2022)학년말 표창</li>
+            <li>2022: 제12회 서부 수학원리탐구축전 발표 부문 표창 <span class="footnote" data-bs-toggle="popover" data-bs-trigger="click" data-bs-content="동아리 표창, 교육장상"><i class="fas fa-info-circle"></i></span></li>
+            <li>2022: 제42회 인천광역시 과학전람회 SW-IT 부문 장려상 (교육감상)</li>
+            <li>2022: 인천광역시 서부교육지원청 청소년의 달 표창 (교육장상)</li>
+            <li>2021: 제25회 인천청소년자원봉사대회 인천광역시청소년활동진흥센터장상</li>
+            <li>2021: 제11회 서부 수학원리탐구축전 보고서 부문 표창 <span class="footnote" data-bs-toggle="popover" data-bs-trigger="click" data-bs-content="동아리 표창, 교육장상"><i class="fas fa-info-circle"></i></span></li>
+            <li>2021: 인천 청소년활동 모범대상 모범청소년 표창 (인천광역시청소년활동진흥센터장)</li>
+            <li>2021: 인천청소년과학탐구대회(과학토론) 중학부 서부지역 대회 은상 <span class="footnote" data-bs-toggle="popover" data-bs-trigger="click" data-bs-content="2위, 교육장상"><i class="fas fa-info-circle"></i></span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center py-3">
+    <small>&copy; 2025 장민서. All Rights Reserved.</small>
+  </footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('.profile-header');
+      if(window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // 콘텐츠 섹션의 Popover 초기화 (헤더 부분은 제외)
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl);
+    });
+  </script>
+</body>
+</html>
