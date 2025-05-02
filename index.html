@@ -181,6 +181,33 @@
     .footnote:hover {
       color: #1a5bb8;
     }
+
+    /* ➊ Profiles 섹션 전용 */
+    .profile-links a.btn-social{
+      border:2px solid #2575fc;      /* 브랜드 블루와 동일 */
+      color:#2575fc;
+      border-radius:50px;
+      padding:.45rem 1.1rem;
+      font-weight:600;
+      letter-spacing:.2px;
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      transition:all .2s ease-in-out;
+    }
+    .profile-links a.btn-social:hover{
+      background:#2575fc;
+      color:#fff;
+      transform:translateY(-2px);
+    }
+    /* 모바일 한 줄 씩 */
+    @media (max-width:575.98px){
+      .profile-links a.btn-social{
+        width:100%;
+        justify-content:center;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -258,6 +285,41 @@
             <i class="fas fa-map-marker-alt contact-icon"></i>
             경기도 수원시 장안구 수일로 135
           </p>
+        </div>
+      </div>
+    </section>
+    <!-- Profiles / Social Links -->
+    <section data-aos="fade-up" data-aos-delay="250">
+      <h2 class="section-title">Profiles</h2>
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex flex-wrap gap-3 profile-links">
+    
+            <!-- 인스타그램 -->
+            <a href="https://instagram.com/your_id" target="_blank"
+               class="btn-social">
+              <i class="fab fa-instagram fa-lg"></i> Instagram
+            </a>
+    
+            <!-- 구글 스칼라 -->
+            <a href="https://scholar.google.com/citations?user=XXXX" target="_blank"
+               class="btn-social">
+              <i class="fas fa-graduation-cap fa-lg"></i> Google Scholar
+            </a>
+    
+            <!-- 깃허브(예시) -->
+            <a href="https://github.com/your_id" target="_blank"
+               class="btn-social">
+              <i class="fab fa-github fa-lg"></i> GitHub
+            </a>
+    
+            <!-- 링크드인(선택) -->
+            <a href="https://linkedin.com/in/your_id" target="_blank"
+               class="btn-social">
+              <i class="fab fa-linkedin fa-lg"></i> LinkedIn
+            </a>
+    
+          </div><!-- /.profile-links -->
         </div>
       </div>
     </section>
