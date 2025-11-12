@@ -1,440 +1,231 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>장민서</title>
-  <link rel="icon" href="./gshs_logo.png" type="image/x-icon">
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- Animate.css -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <!-- AOS CSS (Animate On Scroll) -->
-  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
-  <style>
-    @import url(./pretendardvariable.css);
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>장민서</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <style>
+      body { font-family: 'Pretendard Variable'; }
+      a.no-underline:hover { text-decoration: none !important; }
 
-    body {
-      background: #ffffff;
-      font-family: 'Pretendard', sans-serif;
-      color: #333;
-    }
-
-    /* 공통: 전체 화면 파란색 헤더 */
-    .profile-header {
-      height: 100vh;
-      background: linear-gradient(to right, #1b2d57, #00397f, #00397f, #1b2d57);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.5s ease-out, box-shadow 0.5s ease-out;
-      color: #fff;
-    }
-    .profile-header.scrolled {
-      transform: translateY(-80px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
-
-    /* 데스크탑 헤더 (화면 ≥ md) */
-    .desktop-header { display: none; }
-    @media (min-width: 768px) {
-      .desktop-header { display: block; }
-    }
-    .desktop-header .header-text h1 {
-      font-size: 3.5rem;
-      font-weight: 700;
-      margin: 0 0 1rem;
-      line-height: 1.2;
-    }
-    .desktop-header .header-text h1 small {
-      font-size: 1.2rem;
-      vertical-align: middle;
-      margin-left: 10px;
-    }
-    .desktop-header .header-text p.lead {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: #fff;
-    }
-    .desktop-header .header-bottom-text {
-      font-size: 0.9rem;
-      opacity: 0.9;
-      color: #fff;
-    }
-    .desktop-header .header-logo {
-      text-align: right;
-      position: relative;
-      z-index: 10;
-    }
-    .desktop-header .header-logo img {
-      max-width: 150px;
-      width: 100%;
-      height: auto;
-      max-height: 200px;
-    }
-
-    /* 모바일 헤더 (화면 < md) */
-    .mobile-header { display: none; }
-    @media (max-width: 767.98px) {
-      .mobile-header { display: block; }
-      .mobile-header-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        height: 100%;
-        padding: 0 20px;
+      /* --- Tab buttons (underline style + subtle hover) --- */
+      .tab-btn {
+        transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+        padding: 0.75rem 1.5rem; /* px-6 py-3 */
+        font-size: 0.875rem;     /* text-sm */
+        font-weight: 600;        /* font-semibold */
+        border-bottom: 2px solid transparent;
+        background: transparent;
       }
-      .mobile-header .mobile-header-top {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
+      .tab-btn[aria-selected="true"] {
+        border-bottom-color: rgb(37 99 235);; /* gray-900 */
+        color: rgb(37 99 235);;
       }
-      .mobile-header .mobile-header-top img {
-        max-height: 150px;
-        width: auto;
-      }
-      .mobile-divider {
-        border: none;
-        border-top: 1px solid #fff;
-        margin: 20px 0;
-      }
-      .mobile-header .mobile-header-bottom {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-      }
-      .mobile-header .mobile-header-bottom h1 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin: 0;
-      }
-      .mobile-header .mobile-header-bottom h1 small {
-        font-size: 1rem;
-        margin-left: 10px;
-      }
-      .mobile-header .mobile-header-bottom p.lead {
-        font-size: 1.2rem;
-        margin: 5px 0;
-      }
-      .mobile-header .mobile-header-bottom p {
-        font-size: 0.8rem;
-      }
-    }
-
-    /* 스크롤 유도 아이콘 */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 2rem;
-      color: #fff;
-      animation: bounce 2s infinite;
-      cursor: pointer;
-    }
-    @keyframes bounce {
-      0%,20%,50%,80%,100% { transform: translateX(-50%) translateY(0); }
-      40% { transform: translateX(-50%) translateY(-10px); }
-      60% { transform: translateX(-50%) translateY(-5px); }
-    }
-
-    /* 섹션 제목과 언더라인 */
-    .section-title {
-      display: block;
-      width: 100%;
-      font-weight: 700;
-      color: #0F0F70;
-      margin: 1.5rem 0 0.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 3px solid #0F0F70;
-    }
-
-    /* 카드: 배경 흰색, 테두리/그림자 제거 */
-    .card {
-      background: #ffffff;
-      border: none;
-      box-shadow: none;
-      border-radius: 0;
-      margin-bottom: 1.5rem;
-      padding: 0;
-    }
-    .card-body {
-      padding: 0.5rem;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-
-    ul li {
-      margin-bottom: 0.5rem;
-    }
-    .contact-icon {
-      width: 30px;
-    }
-    a {
-      color: #0F0F70;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* 프로필 링크 소셜 버튼 */
-    .profile-links a.btn-social {
-      border: 2px solid #0F0F70;
-      color: #0F0F70;
-      border-radius: 50px;
-      padding: .45rem 1.1rem;
-      font-weight: 600;
-      letter-spacing: .2px;
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      transition: all .2s ease-in-out;
-    }
-    .profile-links a.btn-social:hover {
-      background: #0F0F70;
-      color: #fff;
-      transform: translateY(-2px);
-    }
-    @media (max-width: 575.98px) {
-      .profile-links a.btn-social {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-  </style>
-
-
-</head>
-<body>
-  <!-- 데스크탑 헤더 (화면 ≥ md) - 원래대로 표시 -->
-  <header class="profile-header desktop-header d-none d-md-block">
-    <div class="container h-100">
-      <div class="row h-100 align-items-center">
-        <!-- 왼쪽: 텍스트 정보 -->
-        <div class="col-12 col-md-8 header-text d-flex flex-column">
-          <h1>
-            장민서 <small>MINSEO JANG</small>
-          </h1>
-          <p class="lead">과학영재학교 경기과학고등학교</p>
-          <p class="header-bottom-text">GYEONGGI SCIENCE HIGH SCHOOL FOR THE GIFTED</p>
-        </div>
-        <!-- 오른쪽: 로고 -->
-        <div class="col-12 col-md-4 header-logo text-md-end">
-          <img src="gshs_logo.png" alt="경기과학고 로고" class="img-fluid">
-        </div>
-      </div>
-    </div>
-    <!-- 스크롤 유도 아이콘 -->
-    <div class="scroll-indicator animate__animated animate__fadeInDown">
-      <i class="fas fa-chevron-down"></i>
-    </div>
-  </header>
-
-  <!-- 모바일 헤더 (화면 < md) - 헤더는 원래대로, 각주는 제외 -->
-  <header class="profile-header mobile-header d-md-none">
-    <div class="mobile-header-container">
-      <div class="mobile-header-top">
-        <!-- 우측 중상단에 로고 -->
-        <div class="w-100 text-end">
-          <img src="gshs_logo.png" alt="경기과학고 로고" class="img-fluid">
-        </div>
-      </div>
-      <!-- 구분선 -->
-      <div class="mobile-divider"></div>
-      <div class="mobile-header-bottom">
-        <!-- 좌측 중하단에 텍스트 정보 -->
-        <h1>
-          장민서 <small>MINSEO JANG</small>
-        </h1>
-        <p class="lead">과학영재학교 경기과학고등학교</p>
-        <p>GYEONGGI SCIENCE HIGH SCHOOL FOR THE GIFTED</p>
-      </div>
-    </div>
-    <!-- 스크롤 유도 아이콘 -->
-    <div class="scroll-indicator animate__animated animate__fadeInDown">
-      <i class="fas fa-chevron-down"></i>
-    </div>
-  </header>
-
-  <main class="container my-4">
-    <br/>  
-    <section>
-      <h2 class="section-title">Education</h2>
-      <div class="card">
-        <div class="card-body">
-          <p>
-            <i class="fa-solid fa-school contact-icon"></i>
-            과학영재학교 <strong>경기과학고등학교</strong> 재학
-          </p>
-          <p>
-            <i class="fa-solid fa-graduation-cap contact-icon"></i>
-            검단중학교 <strong>수석 졸업</strong> 및 <strong>교내상 31개</strong> 수상
-          </p>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="section-title">Contact</h2>
-      <div class="card">
-        <div class="card-body">
-          <p>
-            <i class="fas fa-envelope contact-icon"></i>
-            <a href="mailto:minseo_jang@outlook.com" style="color: black">minseo_jang@outlook.com</a>
-          </p>
-          <p>
-            <i class="fas fa-envelope contact-icon"></i>
-            <a href="mailto:gs24091@gs.hs.kr" style="color: black">gs24091@gs.hs.kr</a>
-          </p>
-          <p>
-            <i class="fas fa-map-marker-alt contact-icon"></i>
-            경기도 수원시 장안구 수일로 135
-          </p>
-        </div>
-      </div>
-    </section>
-    <!-- Profiles / Social Links -->
-    <section>
-      <h2 class="section-title">Link</h2>
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex flex-wrap gap-3 profile-links">
-    
-            <!-- 인스타그램 -->
-            <a href="https://instagram.com/minseoo._.j" target="_blank"
-               class="btn-social">
-              <i class="fab fa-instagram fa-lg"></i> Instagram
+      .tab-btn[aria-selected="false"] { color: rgb(55 65 81); }
+      .tab-btn:hover { background-color: rgb(239 246 255); /* gray-50 */ }
+    </style>
+  </head>
+  <body class="bg-white text-gray-900">
+    <main class="max-w-3xl mx-auto p-8">
+      <!-- Header -->
+      <section id="header" class="flex items-center gap-6 mb-10">
+        <img id="profile-image" src="./myPic.png" alt="profile" class="w-24 h-24 rounded-full object-cover" />
+        <div class="flex flex-col justify-end">
+          <div class="flex flex-wrap items-baseline gap-2">
+            <span id="profile-name" class="text-3xl font-bold leading-tight">장민서</span>
+            <a href="https://gs.hs.kr" target="_blank" rel="noopener noreferrer" id="profile-title" class="no-underline text-lg font-medium text-gray-600 hover:text-blue-600 transition-colors leading-tight inline-flex items-center gap-0.5 align-baseline">
+              경기과학고등학교
+              <svg xmlns="http://www.w3.org/2000/svg" class="tabler-icon tabler-icon-arrow-up-right w-4 h-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M17 7l-10 10" />
+                <path d="M8 7h9v9" />
+              </svg>
             </a>
-    
-            <!-- 구글 스칼라 -->
-            <a href="https://scholar.google.com/citations?user=HiKXznkAAAAJ" target="_blank"
-               class="btn-social">
-              <i class="fas fa-graduation-cap fa-lg"></i> Google Scholar
-            </a>
-    
-            <!-- 깃허브(예시) -->
-            <a href="https://github.com/minseojang-kr" target="_blank"
-               class="btn-social">
-              <i class="fab fa-github fa-lg"></i> GitHub
-            </a>
-    
-            <!-- 링크드인(선택) -->
-            <a href="https://linkedin.com/in/민서-장-6508a8330/" target="_blank"
-               class="btn-social">
-              <i class="fab fa-linkedin fa-lg"></i> LinkedIn
-            </a>
-    
-          </div><!-- /.profile-links -->
+          </div>
+          <p id="profile-email" class="text-gray-500 text-sm mt-1">minseo_jang@outlook.com<br />gs24091@gs.hs.kr</p>
         </div>
-      </div>
-    </section>
-    <section>
-      <h2 class="section-title">Conference PT</h2>
-      <div class="card">
-        <div class="card-body">
-          <p>
-            <strong>[2025 한국정보통신학회 추계학술대회 구두발표]</strong> <strong>장민서</strong>, 김보련, "잎맥 특성을 활용한 Watts-Strogatz 모델 개선"
-          </p>
-          <p>
-            <strong>[2025 한국정보통신학회 추계학술대회 구두발표]</strong> <strong>장민서</strong>, 김민지, 김성헌, 김여정, "카페인 섭취에 따른 심박수 변화량 예측 DNN 모델을 활용한 인공 심장 환자의 심박수 보정 시스템 설계"
-          </p>
-          <p>
-            <strong>[2025 한국공학교육학회 공학교육학술대회 구두발표]</strong> <strong>장민서</strong>, 이호, "토양 데이터 기반 DNN 모델을 활용한 해충 피해 예측 및 교육용 시뮬레이션 설계"
-          </p>
-          <p>
-            <strong>[2025 한국정보통신학회 춘계학술대회 구두발표]</strong> <strong>Minseo Jang</strong>, Boryun Kim, "Plant Species Analysis using Thin Layer Chromatography(TLC) and OpenCV" <a href="https://dbpia.co.kr/journal/articleDetail?nodeId=NODE12303885" target="_blank">[DBpia]</a> <a href="#2025_kiice_spring">[학생우수논문상]</a>
-          </p>
-          <p>
-            <strong>[2024 한국정보통신학회 추계학술대회 구두발표]</strong> 황인성, 고영우, <strong>장민서</strong>, "채색 그래프의 Max Clique 점 집합을 모두 구하는 알고리즘"  <a href="https://dbpia.co.kr/journal/articleDetail?nodeId=NODE12000823" target="_blank">[DBpia]</a> <a href="#2024_kiice_fall">[학생우수논문상]</a>
-          </p>
-          <p>
-            <strong>[2024 한국지구과학회 추계학술발표회 포스터발표]</strong> <strong>장민서</strong>, 이영윤, Bernice Teow, Chloe Chee, 이호, "Production of a Simple GPS System Using the Altitude of the Sun" <a href="#2024_kiice_fall">[고등부 최우수상]</a>
-          </p>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section>
-      <h2 class="section-title">Educational Activity</h2>
-      <div class="card">
-        <div class="card-body">
-          <ul class="list-unstyled">
-            <li>2025 Clemson University Summer Scholars Program Vet Camp 수료</li>
-            <li>2025  경기과학고 개발 및 서버 관리 동아리 DEVOPS 기장 및 교내 연구용 서버 워크숍 개최 <a href="https://gs-h.goesw.kr/subList/31000020334?pmode=detail&nttSeq=1083154" target="_blank">[교육활동 보고자료]</a></li>
-            <li><strong>2025  한국과학기술한림원 청소년과학영재사사(의·약학) 멘티</strong> <span class="footnote" data-bs-toggle="popover" data-bs-trigger="click" data-bs-content="서울대학교 의과대학 피부과학교실"><i class="fas fa-info-circle"></i></span></li>
-            <li>2025  KAIST 겨울 영과고 창의적글로벌리더 캠프 수료</li>
-            <li>2024  서울대학교 농생명과학공동기기원 생명·환경과학 체험학습(동•식물 DNA 추출) 수료</li>
-            <li><strong>2024  한국지구과학올림피아드 기초·심화 교육과정 수료</strong></li>
-            <li><strong>2024  과학기술정보통신부-한국과학창의재단 청소년 글로벌 과학대장정(미국 서부) 수료</strong></li>
-            <li>2024  제20회 경암바이오유스 캠프(연세대학교) 수료</li>
-            <li><strong>2024  GSHS-NJC International Research Exchange Programme 수료 (경기과학고 측 학생 대표)</strong></li>
-            <li>2023  송암스페이스센터 Challenger Learning Center 우주 교실 과정 수료</li>
-            <li><strong>2021  교육부 대학부설 정보보호영재교육원 중등심화과정 수료</strong> <span class="footnote" data-bs-toggle="popover" data-bs-trigger="click" data-bs-content="교육부 지정 대학부설 정보보호영재교육원 서울여대(수도권), 개근상, 우수상"><i class="fas fa-info-circle"></i></span></li>
-            <li><strong>2020  인천대학교 과학영재교육원 초등사사과정 수료</li></strong>
-            <li><strong>2019  인천대학교 과학영재교육원 초등심화과정 수료</li></strong>
-          </ul>
+      <!-- Intro + Tabs -->
+      <section class="mb-6">
+        <div role="tablist" aria-label="Section selector" 
+             class="grid grid-cols-5 border-b border-gray-200 text-center">
+          <button class="tab-btn w-full" data-target="#sec-education" aria-selected="true">학력</button>
+          <button class="tab-btn w-full" data-target="#sec-conference" aria-selected="false">학회발표</button>
+          <button class="tab-btn w-full" data-target="#sec-academic-experience" aria-selected="false">학술활동</button>
+          <button class="tab-btn w-full" data-target="#sec-social-experience" aria-selected="false">사회활동</button>
+          <button class="tab-btn w-full" data-target="#sec-awards" aria-selected="false">수상경력</button>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section>
-      <h2 class="section-title">Social Activity</h2>
-      <div class="card">
-        <div class="card-body">
-          <ul class="list-unstyled">
-            <li><strong>2025-2026  경기과학고등학교 42대 학생회 부회장</strong></li>
-            <li>2025  국제 비영리 코딩교육단체 DEVERY 공동 설립</li>
-            <li><strong>2025  경기과학고등학교 41대 학생회 부회장</strong></li>
-            <li><strong>2023  검단중학교 학생회장</strong></li>
-            <li>2023  인천광역시 교육청 중·고교생 싱가포르 공간혁신 우수기관 탐방 참가 <a href="http://www.thekorea.kr/bbs/board.php?bo_table=news&wr_id=232712" target="_blank">[뉴스기사]</a></li>
-            <li>2023  인천서부교육지원청 교육장 토크콘서트 진행 <a href="https://www.post24.kr/107989" target="_blank">[뉴스기사]</a></li>
-            <li><strong>2022  검단중학교 학생회 부회장</strong></li>
-            <li>2022  인천광역시 서부교육지원청 학생참여위원회 위원</li>
-            <li>2021  인천서부경찰서 청소년 참여 정책자문단 단원</li>
-            <li>2021  검단청소년센터 제13기 청소년운영위원회 부위원장</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-    
-    <section>
-      <h2 class="section-title">Awards</h2>
-      <div class="card">
-        <div class="card-body">
-          <ul class="list-unstyled">
-            <li>2025 경기도 수원교육지원청 청소년의 달 교육장 표창</li>
-            <li id="2025_kiice_spring"><strong>2025 한국정보통신학회 춘계종합학술대회 학생우수논문상</strong></li>
-            <li>2025 경기과학고 수학적모델링대회 은상</li>
-            <li>2024 경기과학고 문제해결프로그래밍대상 은상</li>
-            <!--<li><strong>2024</strong> 경기과학고 봉사부문 표창</li>-->
-            <li id="2024_kiice_fall"><strong>2024 한국정보통신학회 추계종합학술대회 학생우수논문상</strong></li>
-            <li id="2024_kess_fall"><strong>2024 한국지구과학회 추계학술발표회 포스터 발표 분야 고등부 최우수상</strong></li>
-            <li>2024 경기과학고 창의적 아이디어대회 장려상</li>
-            <li><strong>2023 인천광역시 교육감 졸업 표창</strong></li>
-            <li>2023 제13회 서부 수학원리탐구축전 보고서 부문 교육장 표창 (동아리 표창)</li>
-            <li><strong>2023 인천광역시 교육감 청소년의 달 표창</strong></li>
-            <li><strong>2023 인천광역시 청소년대상 (면학부문, 인천광역시장상)</strong></li>
-            <li><strong>2023 인천광역시 교육감 (2022)학년말 표창</strong></li>
-            <li>2022 제12회 서부 수학원리탐구축전 발표 부문 교육장 표창 (동아리 표창)</li>
-            <li><strong>2022 제42회 인천광역시 과학전람회 SW-IT 부문 장려상 (교육감상)</strong></li>
-            <li>2022 인천광역시 서부교육지원청 청소년의 달 교육장 표창</li>
-            <li>2021 제25회 인천청소년자원봉사대회 인천광역시청소년활동진흥센터장상</li>
-            <li>2021 제11회 서부 수학원리탐구축전 보고서 부문 교육장 표창 (동아리 표창)</li>
-            <li>2021 인천 청소년활동 모범대상 모범청소년 표창 (인천광역시청소년활동진흥센터장)</li>
-            <li><strong>2021 인천청소년과학탐구대회(과학토론) 중학부 서부지역 대회 은상 (교육장상)</strong></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </main>
+      <!-- Sections -->
+      <section id="sec-education" class="mb-10">
+        <div id="education" class="space-y-2"></div>
+      </section>
 
-  <footer class="text-center py-3">
-    <small>&copy; 2025 장민서 All Rights Reserved.</small>
-  </footer>
+      <section id="sec-conference" class="mb-10 hidden">
+        <div id="conference" class="space-y-2"></div>
+      </section>
 
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+      <section id="sec-academic-experience" class="mb-10 hidden">
+        <div id="academic-experience" class="space-y-2"></div>
+      </section>
+
+      <section id="sec-social-experience" class="mb-10 hidden">
+        <div id="social-experience" class="space-y-2"></div>
+      </section>
+
+      <section id="sec-awards" class="mb-10 hidden">
+        <div id="awards" class="space-y-2"></div>
+      </section>
+    </main>
+
+    <script>
+      async function init() {
+        try {
+          const response = await fetch('profile.json');
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const data = await response.json();
+          render(data);
+        } catch (error) {
+          console.error('Error loading profile.json:', error);
+          if (location.protocol === 'file:') {
+            console.info('💡 file:// 로 열면 fetch가 막힐 수 있어요. 로컬 서버로 실행하세요.');
+          }
+        }
+      }
+
+      function el(tag, className = '', text = '') {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text) node.textContent = text;
+        return node;
+      }
+
+      // 🔹 테마 맵 (아이콘 박스 색상 + hover 강조 색상)
+      const COLOR_THEMES = {
+        blue:   { border: 'border-blue-400',   bg: 'bg-blue-50',   accent: 'text-blue-600' },
+        green:  { border: 'border-green-400',  bg: 'bg-green-50',  accent: 'text-green-600' },
+        red:    { border: 'border-red-400',    bg: 'bg-red-50',    accent: 'text-red-600' },
+        purple: { border: 'border-purple-400', bg: 'bg-purple-50', accent: 'text-purple-600' },
+        amber:  { border: 'border-amber-400',  bg: 'bg-amber-50',  accent: 'text-amber-600' },
+        gray:   { border: 'border-black',   bg: 'bg-gray-100',   accent: 'text-gray-900' },
+      };
+
+      function getThemeClasses(themeColor) {
+        const key = (themeColor || 'blue').toLowerCase();
+        return COLOR_THEMES[key] || COLOR_THEMES.blue;
+      }
+
+      function renderSection(containerId, items = []) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = '';
+
+        items.forEach(item => {
+          const theme = getThemeClasses(item.themeColor); // ← JSON에서 themeColor 읽기
+
+          const row = el('div', 'flex items-start gap-3 py-4');
+
+          // 아이콘 박스: 항상 테마 반영 (hover 변화 없음)
+          const iconWrap = el(
+            'div',
+            `w-12 h-12 rounded-xl border ${theme.border} ${theme.bg} flex items-center justify-center overflow-hidden shrink-0`
+          );
+
+          let iconEl;
+          if (item.icon) {
+            iconEl = document.createElement('img');
+            iconEl.src = item.icon;
+            iconEl.alt = item.title || 'logo';
+            iconEl.className = 'w-8 h-8 object-contain transition-opacity';
+            iconWrap.appendChild(iconEl);
+          } else {
+            iconEl = el('div', 'w-2 h-2 rounded-full bg-gray-300');
+            iconWrap.appendChild(iconEl);
+          }
+
+          // 본문
+          const body = el('div', 'flex-1 min-w-0');
+
+          // 1행: 제목(좌) / 기간(우)
+          const top = el('div', 'flex items-baseline justify-between gap-3');
+
+          const left = el('div', 'flex items-center gap-0.5 min-w-0');
+          let ext;
+          if (item.url) {
+            const a = document.createElement('a');
+            a.href = item.url;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            a.className = 'font-semibold text-gray-900 hover:no-underline truncate transition-colors';
+            a.textContent = item.title || '';
+            left.appendChild(a);
+
+            ext = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            ext.setAttribute('viewBox','0 0 24 24');
+            ext.setAttribute('fill','none');
+            ext.setAttribute('stroke','currentColor');
+            ext.setAttribute('stroke-width','2');
+            ext.setAttribute('class','w-4 h-4 text-gray-600 flex-none transition-colors');
+            ext.innerHTML = '<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 7l-10 10"/><path d="M8 7h9v9"/>';
+            left.appendChild(ext);
+
+            // hover: 제목/화살표 색만 테마 강조 (아이콘 박스는 변화 없음)
+            a.addEventListener('mouseenter', () => {
+              a.classList.add(theme.accent);
+              ext.classList.add(theme.accent);
+            });
+            a.addEventListener('mouseleave', () => {
+              a.classList.remove(theme.accent);
+              ext.classList.remove(theme.accent);
+            });
+          } else {
+            left.appendChild(el('h3','font-semibold text-gray-900 truncate', item.title || ''));
+          }
+
+          const right = el('div','text-sm text-gray-500 whitespace-nowrap');
+          right.textContent = item.period || '';
+
+          top.appendChild(left);
+          top.appendChild(right);
+          body.appendChild(top);
+
+          // 2행: 서브타이틀
+          if (item.subtitle) {
+            body.appendChild(el('p','text-gray-600 break-words', item.subtitle));
+          }
+
+          row.appendChild(iconWrap);
+          row.appendChild(body);
+          container.appendChild(row);
+        });
+      }
+
+      function setupTabs() {
+        const buttons = Array.from(document.querySelectorAll('.tab-btn'));
+        const sections = ['#sec-education','#sec-conference','#sec-academic-experience','#sec-social-experience','#sec-awards'];
+        function show(target) {
+          sections.forEach(sel => document.querySelector(sel)?.classList.add('hidden'));
+          document.querySelector(target)?.classList.remove('hidden');
+          buttons.forEach(btn => btn.setAttribute('aria-selected', String(btn.dataset.target === target)));
+        }
+        buttons.forEach(btn => btn.addEventListener('click', () => show(btn.dataset.target)));
+        show('#sec-education');
+      }
+
+      function render(data) {
+        renderSection('education', data.education);
+        renderSection('conference', data.conference);
+        renderSection('academic-experience', data.academic_experience);
+        renderSection('social-experience', data.social_experience);
+        renderSection('awards', data.awards);
+        setupTabs();
+      }
+
+      init();
+    </script>
+  </body>
 </html>

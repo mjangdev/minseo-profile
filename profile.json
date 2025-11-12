@@ -1,0 +1,285 @@
+{
+  "education": [
+    {
+        "title": "영재학교 경기과학고등학교 재학",
+        "subtitle": "41-42대 전교부회장 역임",
+        "period": "2024 - 현재",
+        "icon": "/icons/gshs_logo.png",
+        "themeColor": "blue"
+    },
+    {
+        "title": "검단중학교 수석 졸업",
+        "subtitle": "전교회장 역임 및 교내상 31개 수상",
+        "period": "2021 - 2023",
+        "icon": "/icons/gdm_logo.png",
+        "themeColor": "gray"
+    },
+    {
+        "title": "교육부 정보보호영재교육원 수료",
+        "subtitle": "(수도권) 서울여대 중등심화과정, 개근상 및 우수상 수상",
+        "period": "2021",
+        "icon": "/icons/swu_logo.png",
+        "themeColor": "red"
+    },
+    {
+        "title": "인천대학교 과학영재교육원 수료",
+        "subtitle": "초등심화과정 및 초등사사과정",
+        "period": "2019 - 2020",
+        "icon": "/icons/isep_logo.png",
+        "themeColor": "amber"
+    }
+
+  ],
+  "conference": [
+    {
+        "title": "잎맥 특성을 활용한 Watts-Strogatz 모델 개선",
+        "subtitle": "[1저자] 한국정보통신학회 추계학술대회 구두발표",
+        "period": "2025. 10",
+        "icon": "/icons/kiice_logo.png",
+        "themeColor": "amber"
+    },
+    {
+        "title": "카페인 섭취에 따른 심박수 변화량 예측 DNN 모델을 활용한 인공 심장 환자의 심박수 보정 시스템 설계",
+        "subtitle": "[1저자] 한국정보통신학회 추계학술대회 구두발표",
+        "period": "2025. 10",
+        "icon": "/icons/kiice_logo.png",
+        "themeColor": "amber"
+    },
+    {
+        "title": "토양 데이터 기반 DNN 모델을 활용한 해충 피해 예측 및 교육용 시뮬레이션 설계",
+        "subtitle": "[1저자] 한국공학교육학회 공학교육학술대회 구두발표",
+        "period": "2025. 9",
+        "icon": "/icons/ksee_logo.png",
+        "themeColor": "blue",
+        "url":"https://www.ksee.org/html/?pmode=BBBS0004800022&page=1&smode=view&seq=1404&searchValue=&searchTitle=strTitle"
+    },
+    {
+        "title": "Plant Species Analysis using Thin Layer Chromatography(TLC) and OpenCV",
+        "subtitle": "[1저자] 한국정보통신학회 춘계학술대회 구두발표",
+        "period": "2025. 5",
+        "icon": "/icons/kiice_logo.png",
+        "themeColor": "amber",
+        "url" : "https://dbpia.co.kr/journal/articleDetail?nodeId=NODE12303885"
+    },
+    {
+        "title": "채색 그래프의 Max Clique 점 집합을 모두 구하는 알고리즘",
+        "subtitle": "[공저자] 한국정보통신학회 추계학술대회 구두발표",
+        "period": "2024. 10",
+        "icon": "/icons/kiice_logo.png",
+        "themeColor": "amber",
+        "url":"https://dbpia.co.kr/journal/articleDetail?nodeId=NODE12000823"
+    },
+    {
+        "title": "Production of a Simple GPS System Using the Altitude of the Sun",
+        "subtitle": "[1저자] 한국지구과학회 추계학술발표회 포스터발표",
+        "period": "2024. 10",
+        "icon": "/icons/kess_logo.png",
+        "themeColor": "green",
+        "url":"https://kess64.net/bbs/cfrdata/1064"
+    }
+  ],
+  "academic_experience" : [
+    {
+        "title":"한국과학기술한림원 청소년과학영재사사",
+        "subtitle":"(서울대학교 의과대학) 의·약학 분야 수료",
+        "period":"2025. 5 - 2025. 10",
+        "icon":"/icons/kast_logo.png",
+        "themeColor": "gray"
+    },
+    {
+        "title":"Clemson University Summer Scholars",
+        "subtitle":"Completion of Vet Camp",
+        "period":"2025. 7.",
+        "icon":"/icons/cuss_logo.png",
+        "themeColor": "red"
+    },
+    {
+        "title":"KAIST 창의적글로벌리더 캠프",
+        "subtitle":"겨울 영재학교·과학고 캠프 수료",
+        "period":"2025. 1",
+        "icon":"/icons/kaist_logo.png",
+        "themeColor": "blue"
+    },
+    {
+        "title":"서울대학교 농생명과학공동기기원 생명·환경과학 체험학습",
+        "subtitle":"동·식물 DNA 추출 과정 수료",
+        "period":"2024. 11",
+        "icon":"/icons/snu_logo.png",
+        "themeColor":"blue"
+    },
+    {
+        "title":"한국지구과학올림피아드",
+        "subtitle":"기초교육과정 및 심화교육과정 수료",
+        "period":"2024. 6 - 2024. 10",
+        "icon":"/icons/keso_logo.webp",
+        "themeColor":"blue"
+    },
+    {
+        "title":"청소년 글로벌 과학대장정(미국 서부) 수료",
+        "subtitle":"한국과학창의재단 주관",
+        "period":"2024. 8",
+        "icon":"/icons/kosac_logo.png",
+        "themeColor":"amber"
+    },
+    {
+        "title":"경암바이오유스 캠프(연세대학교) 수료",
+        "subtitle":"한국분자·세포생물학회 주관",
+        "period":"2024. 7",
+        "icon":"/icons/ksmcb_logo.png",
+        "themeColor":"blue"
+    },
+    {
+        "title":"GSHS-NJC International Research Exchange Programme",
+        "subtitle":"GSHS 경기과학고 측 학생 대표",
+        "period":"2024. 7",
+        "icon":"/icons/njc_logo.png",
+        "themeColor":"red"
+    }
+  ],
+  "social_experience" : [
+    {
+        "title":"경기과학고등학교 학생회",
+        "subtitle":"41대 전교부회장('25.3 - '25.7) · 42대 전교부회장('25.8 - '26.7)",
+        "period":"2025. 3 - 2026. 7",
+        "icon":"/icons/gshs_logo.png"
+    },
+    {
+        "title":"검단중학교 학생회",
+        "period":"2022 - 2023",
+        "subtitle":"2022 전교부회장 · 2023 전교회장",
+        "icon":"/icons/gdm_logo.png",
+        "themeColor":"gray"
+    },
+    {
+        "title":"인천서부교육지원청 학생참여위원회",
+        "subtitle":"학생참여위원",
+        "period":"2022. 9 - 2023. 8",
+        "icon":"/icons/ice_s_logo.png",
+        "themeColor":"green"
+    },
+    {
+        "title":"인천서부경찰서 청소년참여정책자문단",
+        "subtitle":"청소년참여정책자문단원",
+        "icon":"/icons/seobu_police_logo.png",
+        "period":"2021",
+        "themeColor":"amber"
+    },
+    {
+        "title":"검단청소년센터 청소년운영위원회",
+        "subtitle":"제13기 부위원장",
+        "icon":"/icons/issi_logo.png",
+        "period":"2021",
+        "themeColor":"green"
+    }
+  ],
+  "awards" : [
+    {
+        "title":"인문학술발표대회 최우수상",
+        "subtitle":"KSA 한국과학영재학교",
+        "icon":"/icons/ksa_logo.png",
+        "themeColor":"gray",
+        "period":"2025. 11"
+    },
+    {
+        "title":"학생장려논문상 (2편)",
+        "subtitle":"한국정보통신학회 추계종합학술대회",
+        "icon":"/icons/kiice_logo.png",
+        "themeColor":"amber",
+        "period":"2025. 10"
+    },
+    {
+        "title":"교육장 청소년의 달 표창",
+        "subtitle":"경기도 수원교육지원청",
+        "icon":"/icons/goe_logo.png",
+        "themeColor":"red",
+        "period":"2025. 5"
+    },
+    {
+        "title":"학생우수논문상",
+        "subtitle":"한국정보통신학회 춘계종합학술대회",
+        "icon":"/icons/kiice_logo.png",
+        "themeColor":"amber",
+        "period":"2025. 5"
+    },
+    {
+        "title":"수학적모델링대회 은상",
+        "subtitle":"(교내) 경기과학고등학교",
+        "icon":"/icons/gshs_logo.png",
+        "period":"2025. 4"
+    },
+    {
+        "title":"문제해결프로그래밍대상 은상",
+        "subtitle":"(교내) 경기과학고등학교",
+        "icon":"/icons/gshs_logo.png",
+        "period":"2024. 12"
+    },
+    {
+        "title":"학생우수논문상",
+        "subtitle":"한국정보통신학회 추계종합학술대회",
+        "icon":"/icons/kiice_logo.png",
+        "themeColor":"amber",
+        "period":"2024. 10"
+    },
+    {
+        "title":"포스터 발표 고등부 최우수상",
+        "subtitle":"한국지구과학회 추계학술발표회",
+        "icon":"/icons/kess_logo.png",
+        "themeColor":"green",
+        "period":"2024. 10"
+    },
+    {
+        "title":"창의적 아이디어대회 장려상",
+        "subtitle":"(교내) 경기과학고등학교",
+        "icon":"/icons/gshs_logo.png",
+        "period":"2024. 10."
+    },
+    {
+        "title":"교육감 졸업 표창",
+        "subtitle":"인천광역시교육청",
+        "icon":"/icons/ice_logo.png",
+        "themeColor":"green",
+        "period":"2023. 12"
+    },
+    {
+        "title":"교육감 청소년의 달 표창",
+        "subtitle":"인천광역시교육청",
+        "icon":"/icons/ice_logo.png",
+        "themeColor":"green",
+        "period":"2023. 5"
+    },
+    {
+        "title":"인천광역시 청소년대상",
+        "subtitle":"(면학 부문) 인천광역시장상",
+        "icon":"/icons/icn_logo.png",
+        "period":"2023. 5"
+    },
+    {
+        "title":"교육감 (2022)학년말 표창",
+        "subtitle":"인천광역시교육청",
+        "icon":"/icons/ice_logo.png",
+        "themeColor":"green",
+        "period":"2023. 1"
+    },
+    {
+        "title":"인천광역시 과학전람회 장려상",
+        "subtitle":"(SW-IT 부문) 인천광역시 교육감상",
+        "icon":"/icons/ice_logo.png",
+        "themeColor":"green",
+        "period":"2022. 7"
+    },
+    {
+        "title":"교육장 청소년의 달 표창",
+        "subtitle":"인천서부교육지원청",
+        "icon":"/icons/ice_s_logo.png",
+        "themeColor":"green",
+        "period":"2022. 5"
+    },
+    {
+        "title":"인천청소년과학탐구대회 중학부 서부지역 은상",
+        "subtitle":"(과학토론 부문) 인천서부교육지원청 교육장상",
+        "icon":"/icons/ice_s_logo.png",
+        "themeColor":"green",
+        "period":"2021. 7"
+    }
+  ]
+}
