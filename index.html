@@ -66,7 +66,7 @@
         <div role="tablist" aria-label="Section selector" 
              class="grid grid-cols-5 border-b border-gray-200 text-center">
           <button class="contents-font tab-btn w-full" data-target="#sec-education" aria-selected="true">학력</button>
-          <button class="contents-font tab-btn w-full" data-target="#sec-conference" aria-selected="false">학회발표</button>
+          <button class="contents-font tab-btn w-full" data-target="#sec-conference" aria-selected="false">학술지 및 학회</button>
           <button class="contents-font tab-btn w-full" data-target="#sec-academic-experience" aria-selected="false">학술활동</button>
           <button class="contents-font tab-btn w-full" data-target="#sec-social-experience" aria-selected="false">사회활동</button>
           <button class="contents-font tab-btn w-full" data-target="#sec-awards" aria-selected="false">수상경력</button>
@@ -214,12 +214,91 @@
         show('#sec-education');
       }
 
+      function renderSectionAppend(container, items = []) {
+        items.forEach(item => {
+
+          const row = el('div', 'flex items-center gap-3 py-2');
+
+          const body = el('div', 'flex-1 min-w-0');
+
+          const top = el('div', 'flex items-baseline justify-between gap-3');
+          const left = el('div', 'flex items-center gap-0.5 min-w-0');
+
+          if (item.url) {
+            const a = document.createElement('a');
+            a.href = item.url;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            a.className = 'contents-font font-semibold text-gray-900 hover:no-underline truncate transition-colors';
+            a.textContent = item.title || '';
+            left.appendChild(a);
+
+            // 🔥 이거 추가 (화살표)
+            const ext = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            ext.setAttribute('viewBox','0 0 24 24');
+            ext.setAttribute('fill','none');
+            ext.setAttribute('stroke','currentColor');
+            ext.setAttribute('stroke-width','2');
+            ext.setAttribute('class','w-4 h-4 text-gray-600 flex-none transition-colors');
+            ext.innerHTML = '<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 7l-10 10"/><path d="M8 7h9v9"/>';
+            left.appendChild(ext);
+
+            // hover 색
+            a.addEventListener('mouseenter', () => {
+              a.classList.add('text-blue-600');
+              ext.classList.add('text-blue-600');
+            });
+            a.addEventListener('mouseleave', () => {
+              a.classList.remove('text-blue-600');
+              ext.classList.remove('text-blue-600');
+            });
+
+          } else {
+            left.appendChild(el('h3','contents-font font-semibold text-gray-900 truncate', item.title || ''));
+          }
+
+          top.appendChild(left);
+          body.appendChild(top);
+
+            if (item.subtitle) {
+              const subRow = el('div', 'flex items-baseline justify-between gap-3');
+
+              const subtitle = el('p','text-gray-600 break-words', item.subtitle || '');
+              const period = el('div','text-sm text-gray-500 whitespace-nowrap italic', item.period || '');
+
+              subRow.appendChild(subtitle);
+              subRow.appendChild(period);
+              body.appendChild(subRow);
+            }
+
+            row.appendChild(body);
+            container.appendChild(row);
+          });
+        }
+
       function render(data) {
         renderSection('education', data.education);
-        renderSection('conference', data.conference);
+
+        // ⭐ conference 커스텀 렌더
+        const container = document.getElementById('conference');
+        container.innerHTML = '';
+
+        // 🔹 학회
+        if (data.conference && data.conference.length > 0) {
+          container.appendChild(el('h2','contents-font text-lg font-semibold mt-4 mb-2','학회'));
+          renderSectionAppend(container, data.conference);
+        }
+
+        // 🔹 학술지
+        if (data.journal && data.journal.length > 0) {
+          container.appendChild(el('h2','contents-font text-lg font-semibold mt-6 mb-2','학술지'));
+          renderSectionAppend(container, data.journal);
+        }
+
         renderSection('academic-experience', data.academic_experience);
         renderSection('social-experience', data.social_experience);
         renderSection('awards', data.awards);
+
         setupTabs();
       }
 
