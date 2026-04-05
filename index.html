@@ -129,23 +129,6 @@
 
           const row = el('div', 'flex items-start gap-3 py-4');
 
-          // 아이콘 박스: 항상 테마 반영 (hover 변화 없음)
-          const iconWrap = el(
-            'div',
-            `w-12 h-12 rounded-xl border ${theme.border} ${theme.bg} flex items-center justify-center overflow-hidden shrink-0`
-          );
-
-          let iconEl;
-          if (item.icon) {
-            iconEl = document.createElement('img');
-            iconEl.src = item.icon;
-            iconEl.alt = item.title || 'logo';
-            iconEl.className = 'w-8 h-8 object-contain transition-opacity';
-            iconWrap.appendChild(iconEl);
-          } else {
-            iconEl = el('div', 'w-2 h-2 rounded-full bg-gray-300');
-            iconWrap.appendChild(iconEl);
-          }
 
           // 본문
           const body = el('div', 'flex-1 min-w-0');
@@ -198,7 +181,6 @@
             body.appendChild(el('p','text-gray-600 break-words', item.subtitle));
           }
 
-          row.appendChild(iconWrap);
           row.appendChild(body);
           container.appendChild(row);
         });
